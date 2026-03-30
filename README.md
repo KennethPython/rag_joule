@@ -42,10 +42,11 @@ pip install sentence-transformers   # for embeddings (free, runs locally)
 Create a `.env` file in the project root:
 
 ```
-ANTHROPIC_API_KEY=your-api-key-here
+GROQ_API_KEY=your-api-key-here
 ```
 
-Get a key at [console.anthropic.com](https://console.anthropic.com/) or a free OpenAI key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+Get a key at [https://console.groq.com/keys] this is truly free others like
+[console.anthropic.com](https://console.anthropic.com/) are paying or a free OpenAI key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys) this only has a free tier so not as suitable for a demo based on a fully scraped website.
 
 ### 5. Run the pipeline
 
