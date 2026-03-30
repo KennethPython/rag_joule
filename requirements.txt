@@ -7,6 +7,8 @@ langgraph
 chromadb
 beautifulsoup4
 huggingface_hub
+openai
+groq
 python-dotenv
 pydantic
 pydantic-settings

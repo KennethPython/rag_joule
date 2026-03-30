@@ -54,7 +54,7 @@ def ask(question: str, collection, embedder, client) -> str:
     context = "\n\n---\n\n".join(chunks)
 
     response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="llama-3.3-70b-versatile",
         max_tokens=1024,
         messages=[
             {
@@ -75,7 +75,7 @@ def ask(question: str, collection, embedder, client) -> str:
 
 
 def main() -> None:
-    import openai
+    import groq
     from dotenv import load_dotenv
 
     load_dotenv()
@@ -85,7 +85,7 @@ def main() -> None:
     print("\nLoading index and embedding model...")
     collection = get_collection()
     embedder = get_embedder()
-    client = openai.OpenAI()
+    client = groq.Groq()
 
     print(f"\nJoule chatbot ready ({collection.count()} chunks indexed).")
     print("Type 'quit' or 'exit' to stop.\n")
