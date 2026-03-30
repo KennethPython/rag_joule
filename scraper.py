@@ -15,7 +15,7 @@ PAGES = [
     "/joule-mobiel",
     "/joule-lokaal",
     "/faq",
-    "/jobs",
+    "/jobs/ai-expert",
     "/fietsleasepartner-vergelijken",
 ]
 

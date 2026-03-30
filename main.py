@@ -49,7 +49,7 @@ def retrieve(query: str, collection, embedder) -> list[str]:
     return results["documents"][0]
 
 
-def ask(question: str, collection, embedder, client) -> str:
+def ask(question: str, collection, embedder, client) -> tuple[str, list[str]]:
     chunks = retrieve(question, collection, embedder)
     context = "\n\n---\n\n".join(chunks)
 
@@ -62,6 +62,9 @@ def ask(question: str, collection, embedder, client) -> str:
                 "content": (
                     "Je bent een behulpzame assistent voor Joule, een Belgisch fietsleasebedrijf. "
                     "Beantwoord vragen uitsluitend op basis van de onderstaande context. "
+                    "En als er mensen vragen stellen op open vacatures geef je hen een lijst van open vacatures. "
+                    "En je verwijst ze met een url naar waar ze moeten zijn om het in detail te bekijken. "
+                    "De url is: https://www.joule.be/jobs "
                     "Als het antwoord niet in de context staat, zeg dat dan eerlijk."
                 ),
             },
@@ -71,7 +74,7 @@ def ask(question: str, collection, embedder, client) -> str:
             },
         ],
     )
-    return response.choices[0].message.content
+    return response.choices[0].message.content, chunks
 
 
 def main() -> None:
