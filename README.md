@@ -163,7 +163,7 @@ Each question and its answer are kept together as a **single atomic chunk — ne
 
 HuggingFace is used for demo purposes — the model is completely free and runs locally with no API key required. It supports 50+ languages, making it a good fit for the Dutch content on joule.be. The model (~400 MB) is downloaded once on first run and cached by HuggingFace.
 
-**Vector store:** ChromaDB (embedded, no server needed). The collection is named `joule` and persisted to disk so the index survives restarts. Re-running `rag.py` drops and recreates the collection to stay idempotent.
+**Vector store:** ChromaDB (embedded, no server needed). The collection is named `joule` and persisted to disk so the index survives restarts. Re-running `rag.py` drops and recreates the collection to stay comparably the same.
 
 ---
 
