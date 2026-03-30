@@ -33,13 +33,12 @@ ANTHROPIC_API_KEY=your-api-key-here
 ```
 
 You can get your API key at [console.anthropic.com](https://console.anthropic.com/).
+Or get a free one from OpenAPI at https://platform.openai.com/api-keys
 
 **5. Run the project**
 ```bash
 python main.py
-```
 
----
 
 ## Dependencies
 
