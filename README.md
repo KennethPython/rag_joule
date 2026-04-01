@@ -2,6 +2,12 @@
 
 A Retrieval-Augmented Generation (RAG) pipeline built on top of [joule.be](https://www.joule.be). It scrapes the Joule website, chunks the content intelligently, embeds it with a free multilingual model, and stores the vectors locally — ready to power a grounded Q&A chatbot.
 
+**Live demo:** [kvg-rag-joule.streamlit.app](https://kvg-rag-joule.streamlit.app/)
+
+**Stack:**
+- **Embeddings:** `paraphrase-multilingual-MiniLM-L12-v2` via HuggingFace — a free, locally-run model that converts text into vectors for retrieval
+- **LLM:** Llama 3.3 70B via Groq — a free-tier API that generates answers from the retrieved context
+
 ---
 
 ## Pipeline overview
