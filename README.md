@@ -162,9 +162,26 @@ Each question and its answer are kept together as a **single atomic chunk — ne
 
 **Embedding model:** [`paraphrase-multilingual-MiniLM-L12-v2`](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
 
-HuggingFace is used for demo purposes — the model is completely free and runs locally with no API key required. It supports 50+ languages, making it a good fit for the Dutch content on joule.be. The model (~400 MB) is downloaded once on first run and cached by HuggingFace.
+### What is HuggingFace?
 
-**Vector store:** ChromaDB (embedded, no server needed). The collection is named `joule` and persisted to disk so the index survives restarts. Re-running `rag.py` drops and recreates the collection to stay comparably the same.
+HuggingFace is a platform that hosts thousands of open-source AI models. It is not an LLM itself — think of it as a library where you can download and run models locally on your own machine. In this pipeline it provides the embedding model: a smaller, specialised model whose only job is to convert text into numbers (vectors), not to generate answers. It is free, requires no API key, and runs entirely offline after the first download. The model used here (~400 MB) supports 50+ languages, making it a good fit for the Dutch content on joule.be.
+
+### What does embedding & indexing do?
+
+Embedding converts each text chunk into a vector — a list of numbers that captures its meaning. Chunks with similar meaning end up with similar vectors. Indexing stores all those vectors in ChromaDB so they can be searched quickly. When a user asks a question, the question is embedded the same way, and the closest matching chunks are retrieved — giving the LLM the right context to answer from.
+
+**Vector store:** ChromaDB (embedded, no server needed). The collection is named `joule` and persisted to disk so the index survives restarts. Re-running `rag.py` drops and recreates the collection to stay idempotent.
+
+---
+
+## Trade-offs: Groq & HuggingFace vs paid alternatives
+
+| | This project | Paid alternative |
+|---|---|---|
+| **LLM (Groq)** | Free, but rate-limited (requests/minute). May queue or fail under load. Model quality (Llama 3.3 70B) is good but behind GPT-4o or Claude Sonnet on complex reasoning. | OpenAI / Anthropic: higher quality, higher limits, costs per token. |
+| **Embeddings (HuggingFace)** | Free and local, but the multilingual MiniLM model is small — retrieval quality is noticeably weaker than larger models. Runs on CPU, so indexing is slow. | OpenAI `text-embedding-3-large` or Cohere Embed: significantly better retrieval accuracy, faster via API, but cost per token. |
+
+For a demo this setup works well. For production, switching the embedding model alone tends to have the biggest impact on answer quality.
 
 ---
 
